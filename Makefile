@@ -6,16 +6,23 @@ CXX = g++
 all: pa4
  
 pa4: FEMain.o FEGrid.o Element.o Node.o 
-	  $(CXX) FEMain.o FEGrid.o Element.o Node.o 
+	  $(CXX) -I inc/ FEMain.o FEGrid.o Element.o Node.o 
 
-FEMain.o: FEMain.cpp FEGrid.H 
-	$(CXX) $(CFLAGS) -c -o FEMain.o FEMain.cpp
+FEMain.o:
+	$(CXX) -I inc/ $(CFLAGS) -c -o FEMain.o src/FEMain.cpp
 
-Node.o: Node.cpp Node.H
-	$(CXX) $(CFLAGS) -c -o Node.o Node.cpp
+Node.o:
+	$(CXX) -I inc/ $(CFLAGS) -c -o Node.o src/Node.cpp
 
-Element.o: Element.H Element.cpp 
-	$(CXX) $(CFLAGS) -c -o Element.o Element.cpp
+Element.o:
+	$(CXX) -I inc/ $(CFLAGS) -c -o Element.o src/Element.cpp
 
-FEGrid.o: FEGrid.H FEGrid.cpp Element.H Node.H $(VW)/VisitWriter.H
-	$(CXX) -I$(VW) $(CFLAGS) -c -o FEGrid.o FEGrid.cpp
+FEGrid.o:
+	$(CXX) -I inc/ $(CFLAGS) -c -o FEGrid.o src/FEGrid.cpp
+
+team:
+	@echo "Akhil Manoj"
+	@echo "Shivam Chaturvedi"
+
+clean:
+	rm -f *.o a.out
